@@ -2,68 +2,96 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const vehicles = [
+    {
+      id: "VH-1001",
+      registration: "KA-20-MA-1234",
+      driver: "Rahul Kumar",
+      location: "Udupi",
+      status: "On Trip",
+    },
+    {
+      id: "VH-1002",
+      registration: "KA-19-MB-5678",
+      driver: "Arun Shetty",
+      location: "Mangalore",
+      status: "Available",
+    },
+    {
+      id: "VH-1003",
+      registration: "KA-01-MC-9012",
+      driver: "Sanjay Rao",
+      location: "Bangalore",
+      status: "Maintenance",
+    },
+    {
+      id: "VH-1004",
+      registration: "KA-20-MD-3456",
+      driver: "Vijay Naik",
+      location: "Manipal",
+      status: "On Trip",
+    },
+  ];
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main
+      style={{
+        padding: "32px",
+        fontFamily: "Arial, sans-serif",
+        background: "#f8fafc",
+        color: "#1e293b",
+        minHeight: "100vh",
+      }}
+    >
+      <h1>Fleet Management</h1>
+      <p>Monitor vehicles and their current availability.</p>
+
+      <section
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "16px",
+          marginTop: "24px",
+        }}
+      >
+        {vehicles.map((vehicle) => (
+          <article
+            key={vehicle.id}
+            style={{
+              padding: "20px",
+              border: "1px solid #e2e8f0",
+              borderRadius: "12px",
+              background: "#ffffff",
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <h3>{vehicle.id}</h3>
+            <p>
+              <strong>Registration:</strong> {vehicle.registration}
+            </p>
+            <p>
+              <strong>Driver:</strong> {vehicle.driver}
+            </p>
+            <p>
+              <strong>Location:</strong> {vehicle.location}
+            </p>
+            <p>
+              <strong>Status:</strong>{" "}
+              <span
+                style={{
+                  color:
+                    vehicle.status === "Available"
+                      ? "green"
+                      : vehicle.status === "On Trip"
+                        ? "#2563eb"
+                        : "#d97706",
+                  fontWeight: "bold",
+                }}
+              >
+                {vehicle.status}
+              </span>
+            </p>
+          </article>
+        ))}
+      </section>
+    </main>
   );
 }
